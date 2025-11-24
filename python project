@@ -1,0 +1,67 @@
+import tkinter as tk
+
+class Calculator:
+    def __init__(self, root):
+        self.root = root
+        self.root.configure(background="lightblue")
+        self.root.title("Simple Calculator")
+        self.root.geometry("300x350")
+
+        # Expression string
+        self.expression = ""
+        self.equation = tk.StringVar()
+
+        # Entry field
+        expression_field = tk.Entry(root, textvariable=self.equation, font=('Arial', 18))
+        expression_field.grid(row=0, column=0, columnspan=4, ipadx=8, ipady=8)
+
+        # Buttons layout
+        buttons = [
+            ('7',1,0), ('8',1,1), ('9',1,2), ('+',1,3),
+            ('4',2,0), ('5',2,1), ('6',2,2), ('-',2,3),
+            ('1',3,0), ('2',3,1), ('3',3,2), ('*',3,3),
+            ('0',4,0), ('.',4,1), ('=',4,2), ('/',4,3),
+        ]
+
+        for (text, row, col) in buttons:
+            if text == "=":
+                b = tk.Button(root, text=text, fg="black", bg="lightgreen",
+                              command=self.equalpress, height=2, width=7)
+            else:
+                b = tk.Button(root, text=text, fg="black", bg="lightyellow",
+                              command=lambda t=text: self.press(t), height=2, width=7)
+            b.grid(row=row, column=col)
+
+        # Clear button
+        clear_button = tk.Button(root, text='Clear', fg="black", bg="red",
+                                 command=self.clear, height=2, width=30)
+        clear_button.grid(row=5, column=0, columnspan=4)
+
+    def press(self, num):
+        """Append pressed button to expression"""
+        self.expression += str(num)
+        self.equation.set(self.expression)
+
+    def equalpress(self):
+        """Evaluate the expression safely"""
+        try:
+            total = str(eval(self.expression))
+            self.equation.set(total)
+            self.expression = ""
+        except ZeroDivisionError:
+            self.equation.set("Division by 0 error")
+            self.expression = ""
+        except Exception:
+            self.equation.set("Error")
+            self.expression = ""
+
+    def clear(self):
+        """Clear the expression"""
+        self.expression = ""
+        self.equation.set("")
+
+
+if __name__ == "__main__":
+    gui = tk.Tk()
+    Calculator(gui)
+    gui.mainloop()
