@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kubernetes on Cloud (Amazon EKS)</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #232F3E;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            margin: 50px auto;
+            width: 80%;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin: 20px auto;
+            width: 60%;
+            border-radius: 10px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            color: #FF9900;
+        }
+
+        .status {
+            color: green;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #232F3E;
+            color: white;
+            padding: 15px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Kubernetes on Cloud (Amazon EKS)</h1>
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+            <h2>Cluster Status</h2>
+            <p class="status">Running</p>
+        </div>
+
+        <div class="card">
+            <h2>Worker Nodes</h2>
+            <p id="nodes">3 Active Nodes</p>
+        </div>
+
+        <div class="card">
+            <h2>Pods Running</h2>
+            <p id="pods">12 Pods</p>
+        </div>
+
+        <div class="card">
+            <h2>Application</h2>
+            <p>Sample Web Application Deployed on Amazon EKS</p>
+        </div>
+
+    </div>
+
+    <footer>
+        © 2026 Kubernetes on Cloud using Amazon EKS
+    </footer>
+
+    <script>
+        setInterval(() => {
+            document.getElementById("pods").innerText =
+                Math.floor(Math.random() * 20 + 5) + " Pods";
+
+            document.getElementById("nodes").innerText =
+                Math.floor(Math.random() * 5 + 2) + " Active Nodes";
+        }, 5000);
+    </script>
+
+</body>
+</html>
